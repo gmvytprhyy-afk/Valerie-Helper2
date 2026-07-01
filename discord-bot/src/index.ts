@@ -11,6 +11,8 @@ import * as path from "path";
 import * as fs from "fs";
 import * as dotenv from "dotenv";
 import { initDatabase, testConnection } from "./database";
+import { runMigrations } from "./migrations/v1_economy";
+import { registerAllEvents, populateInviteCache } from "./handlers/events";
 import { Command } from "./types/index";
 import { logger } from "./utils/logger";
 import { errorEmbed } from "./utils/embed";
@@ -76,9 +78,13 @@ function loadCommands(): void {
   logger.info("Bot", `Loaded ${client.commands.size} command(s).`);
 }
 
-client.once(Events.ClientReady, (c) => {
+client.once(Events.ClientReady, async (c) => {
   logger.info("Bot", `Ready! Logged in as ${c.user.tag}`);
   logger.info("Bot", `Serving ${c.guilds.cache.size} guild(s).`);
+  for (const [, guild] of c.guilds.cache) {
+    await populateInviteCache(guild);
+  }
+  logger.info("Bot", "Invite cache populated.");
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
@@ -154,7 +160,9 @@ async function main(): Promise<void> {
   logger.info("Database", "Connection successful.");
 
   await initDatabase();
+  await runMigrations();
 
+  registerAllEvents(client);
   loadCommands();
 
   logger.info("Bot", "Logging in to Discord...");

@@ -27,6 +27,7 @@ export interface GuildSettings {
   ticket_category: string | null;
   ticket_log: string | null;
   automod_enabled: boolean;
+  ping_roles: string[];
   created_at: Date;
   updated_at: Date;
 }
