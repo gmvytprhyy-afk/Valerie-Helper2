@@ -23,6 +23,9 @@ export interface GuildSettings {
   log_channel: string | null;
   mod_channel: string | null;
   welcome_channel: string | null;
+  welcome_message: string | null;
+  leave_channel: string | null;
+  leave_message: string | null;
   mute_role: string | null;
   ticket_category: string | null;
   ticket_log: string | null;

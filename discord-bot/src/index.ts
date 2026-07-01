@@ -14,6 +14,7 @@ import { initDatabase, testConnection } from "./database";
 import { runMigrations } from "./migrations/v1_economy";
 import { runTicketMigrations } from "./migrations/v2_tickets";
 import { runAutomodMigrations } from "./migrations/v3_automod";
+import { runWelcomeMigrations } from "./migrations/v4_welcome";
 import { registerAllEvents, populateInviteCache } from "./handlers/events";
 import { Command } from "./types/index";
 import { logger } from "./utils/logger";
@@ -165,6 +166,7 @@ async function main(): Promise<void> {
   await runMigrations();
   await runTicketMigrations();
   await runAutomodMigrations();
+  await runWelcomeMigrations();
 
   registerAllEvents(client);
   loadCommands();

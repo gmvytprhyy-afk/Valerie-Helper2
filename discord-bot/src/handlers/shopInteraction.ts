@@ -115,6 +115,12 @@ export function registerShopInteraction(client: Client): void {
           `Purchase: ${item.name}`
         );
 
+        // Mark ticket as purchase type
+        await query(
+          `UPDATE tickets SET ticket_type = 'purchase' WHERE id = $1`,
+          [ticketRecord.id]
+        );
+
         const purchaseEmbed = new EmbedBuilder()
           .setColor(config.color.primary as ColorResolvable)
           .setTitle("🛒 New Purchase")
