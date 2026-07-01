@@ -28,6 +28,7 @@ export interface GuildSettings {
   ticket_log: string | null;
   automod_enabled: boolean;
   ping_roles: string[];
+  sell_roles: string[];
   created_at: Date;
   updated_at: Date;
 }
@@ -88,6 +89,7 @@ export interface SellPanel {
   guild_id: string;
   name: string;
   description: string | null;
+  looking_for: string | null;
   channel_id: string | null;
   message_id: string | null;
   created_at: Date;
@@ -111,8 +113,20 @@ export interface Ticket {
   subject: string | null;
   status: "open" | "closed" | "claimed";
   claimed_by: string | null;
+  ticket_type: "purchase" | "sell" | "support";
+  panel_id: number | null;
   created_at: Date;
   closed_at: Date | null;
+}
+
+export interface SupportPanel {
+  id: number;
+  guild_id: string;
+  title: string;
+  description: string | null;
+  channel_id: string | null;
+  message_id: string | null;
+  created_at: Date;
 }
 
 export interface TicketMessage {
