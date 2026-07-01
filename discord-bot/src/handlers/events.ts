@@ -5,6 +5,7 @@ import { registerGuildMemberAdd } from "../events/guildMemberAdd";
 import { registerGuildMemberRemove } from "../events/guildMemberRemove";
 import { registerShopInteraction } from "./shopInteraction";
 import { registerTicketButtons } from "./ticketButtons";
+import { registerAutoMod } from "../events/automod";
 import { logger } from "../utils/logger";
 
 async function populateInviteCache(guild: Guild): Promise<void> {
@@ -22,6 +23,7 @@ export function registerAllEvents(client: Client): void {
   registerGuildMemberRemove(client);
   registerShopInteraction(client);
   registerTicketButtons(client);
+  registerAutoMod(client);
 
   client.on(Events.GuildCreate, async (guild: Guild) => {
     await populateInviteCache(guild);

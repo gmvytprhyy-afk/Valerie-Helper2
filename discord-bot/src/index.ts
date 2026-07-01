@@ -13,6 +13,7 @@ import * as dotenv from "dotenv";
 import { initDatabase, testConnection } from "./database";
 import { runMigrations } from "./migrations/v1_economy";
 import { runTicketMigrations } from "./migrations/v2_tickets";
+import { runAutomodMigrations } from "./migrations/v3_automod";
 import { registerAllEvents, populateInviteCache } from "./handlers/events";
 import { Command } from "./types/index";
 import { logger } from "./utils/logger";
@@ -163,6 +164,7 @@ async function main(): Promise<void> {
   await initDatabase();
   await runMigrations();
   await runTicketMigrations();
+  await runAutomodMigrations();
 
   registerAllEvents(client);
   loadCommands();
