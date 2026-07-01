@@ -1,0 +1,11 @@
+{
+  "clientId": "YOUR_CLIENT_ID",
+  "guildId": "YOUR_GUILD_ID_FOR_DEV",
+  "color": {
+    "primary": 5814783,
+    "success": 5763719,
+    "error": 15548997,
+    "warning": 16776960,
+    "info": 3447003
+  }
+}
