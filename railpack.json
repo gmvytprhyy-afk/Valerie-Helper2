@@ -1,0 +1,10 @@
+{
+  "build": {
+    "cmds": [
+      "cd discord-bot && npm ci && npm run build"
+    ]
+  },
+  "start": {
+    "cmd": "cd discord-bot && node dist/index.js"
+  }
+}
